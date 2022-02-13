@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.codechallenge.lottoapi.model.LottoVO;
 import com.codechallenge.lottoapi.service.LottoService;
 
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/v1")
 public class LottoController {
@@ -40,6 +42,7 @@ public class LottoController {
 		userNumbers.add(n4);
 		userNumbers.add(n5);
 		userNumbers.add(n6);
+		System.out.println("Numbers are >>"+n1+ " "+n2+ " "+n3+ " "+n4+ " "+n5+ " "+n6+ " ");
 		LottoVO lottoVO = lottoService.getLottoWinningDetails(userNumbers);
 		
 		return ResponseEntity.ok().body(lottoVO);
