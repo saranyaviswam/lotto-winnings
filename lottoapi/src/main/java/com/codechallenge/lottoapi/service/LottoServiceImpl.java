@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,9 +56,9 @@ public class LottoServiceImpl implements LottoService {
 			if (result.getNumbers().contains(result.getBonusNumber())) {
 				representation += "+";
 			}
-			
+
 			Integer winningAmount = WINNING_FORMULA.get(representation);
-			if(winningAmount == null) {
+			if (winningAmount == null) {
 				continue;
 			}
 			lottoVO.addTotalWon(new BigDecimal(winningAmount));
@@ -64,7 +66,7 @@ public class LottoServiceImpl implements LottoService {
 				LottoWinningDeatilsVO winningDetails = new LottoWinningDeatilsVO(result.getDrawDate(), winningAmount);
 				lottoVO.addWinningDetails(winningDetails);
 			}
-			
+
 		}
 
 		lottoVO.setTotalSpent(totalSpent);
@@ -74,17 +76,17 @@ public class LottoServiceImpl implements LottoService {
 
 	private List<LottoResultsVO> getLottoResults() {
 		List<LottoResultsVO> results = new ArrayList<>();
-		
-		//try (CSVReader reader = new CSVReader(new FileReader("src/main/resources/data/649.csv"))) {
-		try (CSVReader reader = new CSVReader(new FileReader(getHistoricalDataFileName()))) {	
+
+		try (InputStream is = getClass().getClassLoader().getResourceAsStream("data/649.csv");
+				CSVReader reader = new CSVReader(new InputStreamReader(is))) {
 			String[] lineInArray;
 			try {
 				while ((lineInArray = reader.readNext()) != null) {
-					System.out.println("---"+lineInArray[2]+"---");
+					System.out.println("---" + lineInArray[2] + "---");
 					if (lineInArray[2].trim().equals("0")) {
 						LottoResultsVO vo = new LottoResultsVO();
 						results.add(vo);
-						
+
 						vo.setDrawNumber(Integer.parseInt(lineInArray[1]));
 						vo.setSeqNumber(Integer.parseInt(lineInArray[2]));
 						vo.setDrawDate(lineInArray[3]);
@@ -111,29 +113,20 @@ public class LottoServiceImpl implements LottoService {
 		System.out.println(results);
 		return results;
 	}
-	
+
 	private BigDecimal getTotalSpent(int totalDrawNumber) {
-		
-		//2124*1 + (2989 - 2124)*2 + (totalDrawNumber - 2989)*3
+
+		// 2124*1 + (2989 - 2124)*2 + (totalDrawNumber - 2989)*3
 		BigDecimal oneDollarDraws = new BigDecimal(2124);
-		BigDecimal twoDollarDraws = new BigDecimal((2989-2124)*2);
-		BigDecimal threeDollarDraws = new BigDecimal((totalDrawNumber - 2989)*3);
-		
+		BigDecimal twoDollarDraws = new BigDecimal((2989 - 2124) * 2);
+		BigDecimal threeDollarDraws = new BigDecimal((totalDrawNumber - 2989) * 3);
+
 		BigDecimal totalSpent = oneDollarDraws.add(twoDollarDraws).add(threeDollarDraws);
 		return totalSpent;
 	}
-	
+
 	private BigDecimal getNetWinOrLoss(BigDecimal totalWon, BigDecimal totalSpent) {
 		return totalWon.subtract(totalSpent);
-	}
-	
-	private String getHistoricalDataFileName() {
-		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource("data/649.csv").getFile());
-		
-		String absolutePath = file.getAbsolutePath();
-		System.out.println("File absolute path "+absolutePath);
-		return absolutePath;
 	}
 
 }
