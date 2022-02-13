@@ -132,7 +132,7 @@ public class LottoServiceImpl implements LottoService {
 		File file = new File(classLoader.getResource("data/649.csv").getFile());
 		
 		String absolutePath = file.getAbsolutePath();
-		
+		System.out.println("File absolute path "+absolutePath);
 		return absolutePath;
 	}
 
