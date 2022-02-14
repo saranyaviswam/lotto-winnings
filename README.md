@@ -18,7 +18,7 @@ A web application to calculate the historical winning amount for same numbers.
 - [x] Test cases : JUnit test cases has been added for unit testing.
 
 ## Application URL
-AWS Url for the application :http://lottowinnings-ui-client.s3-website-us-east-1.amazonaws.com/
+Url to access the application :http://lottowinnings-ui-client.s3-website-us-east-1.amazonaws.com/
 
 ### Endpoints
 REST API endpoint to calculate the winnings;
