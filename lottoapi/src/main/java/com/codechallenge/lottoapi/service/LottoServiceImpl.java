@@ -1,8 +1,6 @@
 package com.codechallenge.lottoapi.service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,7 +51,7 @@ public class LottoServiceImpl implements LottoService {
 		for (LottoResultsVO result : results) {
 			String representation = String
 					.valueOf(CollectionUtils.intersection(userNumbers, result.getNumbers()).size());
-			if (result.getNumbers().contains(result.getBonusNumber())) {
+			if (userNumbers.contains(result.getBonusNumber())) {
 				representation += "+";
 			}
 
@@ -121,8 +119,7 @@ public class LottoServiceImpl implements LottoService {
 		BigDecimal twoDollarDraws = new BigDecimal((2989 - 2124) * 2);
 		BigDecimal threeDollarDraws = new BigDecimal((totalDrawNumber - 2989) * 3);
 
-		BigDecimal totalSpent = oneDollarDraws.add(twoDollarDraws).add(threeDollarDraws);
-		return totalSpent;
+		return oneDollarDraws.add(twoDollarDraws).add(threeDollarDraws);
 	}
 
 	private BigDecimal getNetWinOrLoss(BigDecimal totalWon, BigDecimal totalSpent) {
