@@ -80,7 +80,6 @@ public class LottoServiceImpl implements LottoService {
 			String[] lineInArray;
 			try {
 				while ((lineInArray = reader.readNext()) != null) {
-					System.out.println("---" + lineInArray[2] + "---");
 					if (lineInArray[2].trim().equals("0")) {
 						LottoResultsVO vo = new LottoResultsVO();
 						results.add(vo);
@@ -108,7 +107,6 @@ public class LottoServiceImpl implements LottoService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(results);
 		return results;
 	}
 
