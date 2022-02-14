@@ -14,7 +14,7 @@ A web application to calculate the historical winning amount for same numbers.
 - [x] CI/CD : Github Actions used to implement CI/CD pipeline for both REST API and Web application. For every push to main branch, Github Actions gets triggered and deploys the component to AWS based on the changes. It involves 3 steps;
 - Unit test execution using JUnit
 - Build
-- Deploy to AWS : Elastic beanstalk was used as it's easy to integrate and deploy.
+- Deploy to AWS : Elastic beanstalk is used to deploy REST APi and AWS S3 is used to deploy Web.
 - [x] Test cases : JUnit test cases has been added for unit testing.
 
 ## Application URL
