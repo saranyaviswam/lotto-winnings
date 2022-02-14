@@ -18,10 +18,10 @@ A web application to calculate the historical winning amount for same numbers.
 - [x] Test cases : JUnit test cases has been added for unit testing.
 
 ## Application URL
-Url to access the application :http://lottowinnings-ui-client.s3-website-us-east-1.amazonaws.com/
+Url to access the application : http://lottowinnings-ui-client.s3-website-us-east-1.amazonaws.com/
 
 ### Endpoints
-REST API endpoint to calculate the winnings;
+REST API endpoint to calculate the winnings;<br/>
 GET http://lottowinningsapideploy-env.eba-zby67cpm.us-east-1.elasticbeanstalk.com/api/v1/lottoResults?n1={first number}&n2={second number}&n3={third number}&n4={fourth number}&n5={fifth number}&n6={sixth number}
 
 
